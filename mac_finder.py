@@ -1,14 +1,22 @@
-class Macfinder:
+class MacFinder:
+    """ Classe para tratar casos relacionados ao endereço MAC.
+
+    """
     def __init__(self, MAC):
+        """ Inicializa o objeto.
+
+        Arguments:
+            MAC {str} -- O endereço MAC do dispositivo.
+        """
         self.MAC = MAC
         self.manufacturer = self.parseManuf()
 
     def parseManuf(self):
         """ Trata o arquivo Manuf e retorna um dicionário com
-        o MAC e seu fabricante
+        o MAC e seu fabricante.
 
         Returns:
-            Object -- Dicionário contendo MAC e nome do fabricante
+            Object -- Dicionário contendo MAC e nome do fabricante.
         """
         d = {}
         with open("manuf") as f:
