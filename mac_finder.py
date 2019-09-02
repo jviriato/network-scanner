@@ -9,7 +9,7 @@ class MacFinder:
             mac {str} -- O endereço MAC do dispositivo.
         """
         self.mac = mac
-        self.manufacturer = self.parseManuf()
+        self.manufacturer = self.getManufacturer(mac)
 
     def parseManuf(self):
         """ Trata o arquivo Manuf e retorna um dicionário com
@@ -26,3 +26,12 @@ class MacFinder:
                     (key, val) = line_parsed
                     d[key] = val
         return d
+
+    def getManufacturer(self, mac):
+        #TODO
+        """Retorna o Fabricante à partir de um endereço MAC.
+        
+        Arguments:
+            mac {str} -- Endereço MAC
+        """
+        pass

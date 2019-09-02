@@ -231,4 +231,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+historico.csv
 # End of https://www.gitignore.io/api/git,code,python,pycharm
