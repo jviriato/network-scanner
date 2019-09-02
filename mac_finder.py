@@ -2,13 +2,13 @@ class MacFinder:
     """ Classe para tratar casos relacionados ao endereço MAC.
 
     """
-    def __init__(self, MAC):
+    def __init__(self, mac):
         """ Inicializa o objeto.
 
         Arguments:
-            MAC {str} -- O endereço MAC do dispositivo.
+            mac {str} -- O endereço MAC do dispositivo.
         """
-        self.MAC = MAC
+        self.mac = mac
         self.manufacturer = self.parseManuf()
 
     def parseManuf(self):
