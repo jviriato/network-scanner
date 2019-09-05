@@ -36,7 +36,3 @@ class MacFinder:
 
         fabricante = d.get(initMac, 'Este MAC não existe!')
         return fabricante
-
-if __name__ == '__main__':
-    m = MacFinder("68:c4:4d:ba:6f:ef")
-    print(m.manufacturer)
