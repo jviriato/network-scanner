@@ -1,10 +1,6 @@
 
 import socket
-import csv
-from datetime import date
 import scapy.all as scapy
-from mac_finder import MacFinder
-from device import Device
 class NetworkScanner:
     """ Classe para realizar o scan da rede.
     """
@@ -27,11 +23,3 @@ class NetworkScanner:
             client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
             clients_list.append(client_dict)
         return clients_list
-
-    def createCSV(self):
-        """ Cria o csv que mantém o histórico de dispositivos numa rede
-        """
-        firstRow = ['ID', 'IP', 'MAC', 'Fabricante', 'Hora Descoberta']
-        with open('historico.csv', 'a') as h:
-            writer = csv.writer(h)
-            writer.writerow(firstRow)
