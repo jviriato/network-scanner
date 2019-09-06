@@ -2,13 +2,9 @@ class MacFinder:
     """ Classe para tratar casos relacionados ao endereço MAC.
 
     """
-    def __init__(self, mac):
+    def __init__(self):
         """ Inicializa o objeto.
-
-        Arguments:
-            mac {str} -- O endereço MAC do dispositivo.
         """
-        self.mac = mac
         self.manuf = self.parseManuf()
 
     def parseManuf(self):
@@ -27,11 +23,11 @@ class MacFinder:
                     d[key] = val
         return d
 
-    def getManufacturer(self):
+    def getManufacturer(self, mac):
         """Retorna o Fabricante à partir de um endereço MAC.
         """
-        self.mac.replace('-', ':')
-        initMac = self.mac[0:8].upper()
+        mac.replace('-', ':')
+        initMac = mac[0:8].upper()
         d = self.parseManuf()
 
         fabricante = d.get(initMac, 'Este MAC não existe!')

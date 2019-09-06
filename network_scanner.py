@@ -1,26 +1,33 @@
 
-import subprocess
 import socket
 import csv
-import os
 from datetime import date
+import scapy.all as scapy
 from mac_finder import MacFinder
 from device import Device
 class NetworkScanner:
     """ Classe para realizar o scan da rede.
     """
-    def __init__(self):
-        self.today = date.today()
+    def __init__(self, ip):
+        self.ip = ip
 
-    def getOwnIpAddress(self):
-        """Retorna o IP do usuário
+    def scan(self):
+        """ Realiza o scan da rede e retorna
+                
         Returns:
-            str -- IP do usuário formatado
+            Array -- Uma array de clientes
         """
-        hostname = socket.gethostname()
-        ipAddr = socket.gethostbyname(hostname)
-        return ipAddr
-    
+        arp_request = scapy.ARP(pdst=self.ip)
+        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        arp_request_broadcast = broadcast/arp_request
+        answered_list = scapy.srp(arp_request_broadcast, timeout=12,
+                              verbose=True)[0]
+        clients_list = []
+        for element in answered_list:
+            client_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+            clients_list.append(client_dict)
+        return clients_list
+
     def createCSV(self):
         """ Cria o csv que mantém o histórico de dispositivos numa rede
         """
