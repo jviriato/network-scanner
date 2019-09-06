@@ -16,9 +16,12 @@ Exemplo de uso:
 """
 
 def parseArguments():
-    parser = argparse.ArgumentParser(description='Recebe o IP do usuário (c/ subnet mask).')    
-    parser.add_argument('--ip', metavar='i', type=str,
-                    help='Recebe o IP do usuário (c/ subnet mask).', required=True)
+    parser = argparse.ArgumentParser(description='--help para mais infos.')    
+    parser.add_argument('--ip', 
+                        metavar='i', 
+                        type=str,
+                        help='Recebe o IP do usuário (c/ subnet mask).', 
+                        required=True)
     return parser.parse_args()
 
 def parseDevices(clients):
