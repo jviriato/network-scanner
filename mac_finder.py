@@ -20,7 +20,7 @@ class MacFinder:
                 line_parsed = line.split("\t", 1)
                 if (line[0] != '#' and len(line_parsed) > 1):
                     (key, val) = line_parsed
-                    d[key] = val
+                    d[key] = val.rstrip('\n')
         return d
 
     def getManufacturer(self, mac):

@@ -1,8 +1,8 @@
+import argparse
 from network_scanner import NetworkScanner
 from mac_finder import MacFinder
-from datetime import date
 from device import Device
-import argparse
+from writer import Writer
 
 """
 Network Scanner
@@ -44,7 +44,8 @@ def main():
     clients = net.scan()
     devices = parseDevices(clients)
     printDevices(devices)
-
+    w = Writer(devices)
+    w.writeToCSV()
 
 if __name__ == "__main__":
     main()
