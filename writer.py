@@ -20,5 +20,5 @@ class Writer():
         with open('historico.csv', 'a') as h:
             writer = csv.writer(h)
             for device in self.devices:
-                row = ['0', device.ip, device.mac, device.manufacturer, now.strftime("%D %HH%mm")]
+                row = ['0', device.ip, device.mac, device.manufacturer, now.strftime("%D %Hh%mm")]
                 writer.writerow(row)

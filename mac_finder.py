@@ -15,7 +15,7 @@ class MacFinder:
             Object -- Dicionário contendo MAC e nome do fabricante.
         """
         d = {}
-        with open("manuf") as f:                            #win: with open("manuf.txt", encoding='utf-8') as f:
+        with open("manuf.txt", encoding='utf-8') as f:                            #win: with open("manuf.txt", encoding='utf-8') as f:
             for line in f:
                 line_parsed = line.split("\t", 1)
                 if (line[0] != '#' and len(line_parsed) > 1):
@@ -23,12 +23,15 @@ class MacFinder:
                     d[key] = val.rstrip('\n')
         return d
 
+
+    def _parseMACManufacturer(self):
+      """ Retorna os 3 primeiros sets do endereço MAC.
+      """
+      return self.mac.replace('-', ':')[:8].upper()
+
     def getManufacturer(self, mac):
         """Retorna o Fabricante à partir de um endereço MAC.
         """
-        mac.replace('-', ':')
-        initMac = mac[0:8].upper()
-        d = self.parseManuf()
-
-        fabricante = d.get(initMac, 'Este MAC não existe!')
-        return fabricante
+        initMac = self._parseMACManufacturer()
+        return self.manuf.get(initMac, 'Este MAC não existe!')
+    

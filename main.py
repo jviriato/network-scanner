@@ -3,7 +3,7 @@ from network_scanner import NetworkScanner
 from mac_finder import MacFinder
 from device import Device
 from writer import Writer
-
+import time
 """
 Network Scanner
     José Victor Viriato 
@@ -24,7 +24,7 @@ def parseArguments():
                         required=True)
     parser.add_argument('--time', 
                         metavar='t', 
-                        type=int,
+                        type=float,
                         help='O intervalo de tempo (em minutos) que será realizado o scan.', 
                         required=True)
     return parser.parse_args()
@@ -45,12 +45,14 @@ def printDevices(devices):
 
 def main():
     args = parseArguments()
-    net = NetworkScanner(args.ip)
-    clients = net.scan()
-    devices = parseDevices(clients)
-    printDevices(devices)
-    w = Writer(devices)
-    w.writeToCSV()
+    while(True):
+        net = NetworkScanner(args.ip)
+        clients = net.scan()
+        devices = parseDevices(clients)
+        printDevices(devices)
+        w = Writer(devices)
+        w.writeToCSV()
+        time.sleep(60 * args.time)
 
 if __name__ == "__main__":
     main()
