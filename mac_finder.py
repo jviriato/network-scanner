@@ -15,7 +15,7 @@ class MacFinder:
             Object -- Dicionário contendo MAC e nome do fabricante.
         """
         d = {}
-        with open("manuf.txt", encoding='utf-8') as f:                            #win: with open("manuf.txt", encoding='utf-8') as f:
+        with open("manuf.txt", encoding='utf-8') as f:
             for line in f:
                 line_parsed = line.split("\t", 1)
                 if (line[0] != '#' and len(line_parsed) > 1):
