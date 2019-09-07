@@ -12,7 +12,7 @@ Instalação:
     pip install -r requirements.txt
 Exemplo de uso:
     (necessário permissão root)
-    sudo python3 main.py --ip '192.168.1.103/24'
+    sudo python3 main.py --ip '192.168.1.1/24' --time 1
 """
 
 def parseArguments():
@@ -20,7 +20,12 @@ def parseArguments():
     parser.add_argument('--ip', 
                         metavar='i', 
                         type=str,
-                        help='Recebe o IP do usuário (c/ subnet mask).', 
+                        help='Recebe o IP (c/ subnet mask).', 
+                        required=True)
+    parser.add_argument('--time', 
+                        metavar='t', 
+                        type=int,
+                        help='O intervalo de tempo (em minutos) que será realizado o scan.', 
                         required=True)
     return parser.parse_args()
 
