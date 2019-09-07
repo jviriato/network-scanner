@@ -24,14 +24,14 @@ class MacFinder:
         return d
 
 
-    def _parseMACManufacturer(self):
+    def _parseMACManufacturer(self, mac):
       """ Retorna os 3 primeiros sets do endereço MAC.
       """
-      return self.mac.replace('-', ':')[:8].upper()
+      return mac.replace('-', ':')[:8].upper()
 
     def getManufacturer(self, mac):
         """Retorna o Fabricante à partir de um endereço MAC.
         """
-        initMac = self._parseMACManufacturer()
+        initMac = self._parseMACManufacturer(mac)
         return self.manuf.get(initMac, 'Este MAC não existe!')
     
