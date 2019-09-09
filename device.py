@@ -1,5 +1,5 @@
 class Device:
-    def __init__(self, ip, mac, manufacturer, isHost):
+    def __init__(self, ip, mac, manufacturer, isHost = True):
         self.ip = ip
         self.mac = mac
         self.manufacturer = manufacturer

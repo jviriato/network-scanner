@@ -45,13 +45,13 @@ def printDevices(devices):
 
 def main():
     args = parseArguments()
+    net = NetworkScanner(args.ip)
+    w = Writer()
     while(True):
-        net = NetworkScanner(args.ip)
         clients = net.scan()
         devices = parseDevices(clients)
         printDevices(devices)
-        w = Writer(devices)
-        w.writeToCSV()
+        w.writeToCSV(devices)
         time.sleep(60 * args.time)
 
 if __name__ == "__main__":
