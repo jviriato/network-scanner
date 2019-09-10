@@ -26,6 +26,7 @@ class Writer():
         devices = []
         with open('historico.csv', 'r') as h:
             reader = csv.reader(h)
+            next(reader) # pula header
             for row in reader:
                 devices.append(Device(ip = row[1], mac = row[2], manufacturer = row[3]))
-        return devices
+        return devices  

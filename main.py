@@ -13,6 +13,10 @@ Instalação:
 Exemplo de uso:
     (necessário permissão root)
     sudo python3 main.py --ip '192.168.1.1/24' --time 1
+Argumentos:
+    --time: De quanto em quanto tempo (em minutos) é realizado o scan. Ex: --time 15
+    --ip: Passar o ip e máscara como argumento. Ex: --ip '192.168.1.1/24'
+    --interface: Passar interface (para descobrir o IP, máscara e end. do router) Ex: --interface wlp6s0
 """
 
 def parseArguments():
@@ -39,6 +43,15 @@ def parseDevices(clients):
                               isHost = False))
     return devices
 
+def compareDevices(devices, csv_devices):
+    for device in devices:
+        if (any(d.mac == device.mac for d in csv_devices)):
+            device.status = "Online"
+        else:
+            device.status = "Novo"
+    return list(set(devices + csv_devices))
+        
+
 def printDevices(devices):
     for device in devices:
         print(device)
@@ -50,7 +63,9 @@ def main():
     while(True):
         clients = net.scan()
         devices = parseDevices(clients)
-        printDevices(devices)
+        csv_devices = w.getDevicesFromCSV()
+        list_to_print = compareDevices(devices, csv_devices)
+        printDevices(list_to_print)
         w.writeToCSV(devices)
         time.sleep(60 * args.time)
 
