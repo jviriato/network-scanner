@@ -1,4 +1,5 @@
 
+import os
 import socket
 import scapy.all as scapy
 class NetworkScanner:
@@ -6,6 +7,15 @@ class NetworkScanner:
     """
     def __init__(self, ip):
         self.ip = ip
+
+    def getRouterIP(self):
+        """ Para funcionar, a distribuição precisa ter iproute2.
+            Faz um grep para retornar apenas o IP do router no ip route
+        """
+        try:
+            return os.popen('ip route | grep -E -o "default via ([0-9]{1,3}[\.]){3}[0-9]{1,3}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"').read()
+        except:
+            return '0'
 
     def scan(self):
         """ Realiza o scan da rede e retorna

@@ -16,7 +16,6 @@ Exemplo de uso:
 Argumentos:
     --time: De quanto em quanto tempo (em minutos) é realizado o scan. Ex: --time 15
     --ip: Passar o ip e máscara como argumento. Ex: --ip '192.168.1.1/24'
-    --interface: Passar interface (para descobrir o IP, máscara e end. do router) Ex: --interface wlp6s0
 """
 
 def parseArguments():
@@ -43,12 +42,15 @@ def parseDevices(clients):
                               isHost = False))
     return devices
 
-def compareDevices(devices, csv_devices):
+def compareDevices(devices, csv_devices, ip_router):
     for device in devices:
         if (any(d.mac == device.mac for d in csv_devices)):
             device.status = "Online"
         else:
             device.status = "Novo"
+        if (device.ip.strip() == ip_router.strip()):
+            print('estou aqui!')
+            device.status = "Router"
     return list(set(devices + csv_devices))
         
 
@@ -64,7 +66,7 @@ def main():
         clients = net.scan()
         devices = parseDevices(clients)
         csv_devices = w.getDevicesFromCSV()
-        list_to_print = compareDevices(devices, csv_devices)
+        list_to_print = compareDevices(devices, csv_devices, net.getRouterIP())
         printDevices(list_to_print)
         w.writeToCSV(devices)
         time.sleep(60 * args.time)
