@@ -12,7 +12,7 @@ Instalação:
     pip install -r requirements.txt
 Exemplo de uso:
     (necessário permissão root)
-    sudo python3 main.py --ip '192.168.1.1/24' --time 1
+    sudo python3 main.py --ip '192.168.1.1/24' --time 15
 Argumentos:
     --time: De quanto em quanto tempo (em minutos) é realizado o scan. Ex: --time 15
     --ip: Passar o ip e máscara como argumento. Ex: --ip '192.168.1.1/24'
@@ -24,7 +24,7 @@ def parseArguments():
                         metavar='i', 
                         type=str,
                         help='Recebe o IP (c/ subnet mask).', 
-                        required=True)
+                        required=False)
     parser.add_argument('--time', 
                         metavar='t', 
                         type=float,
@@ -60,7 +60,10 @@ def printDevices(devices):
 
 def main():
     args = parseArguments()
-    net = NetworkScanner(args.ip)
+    if args.ip:
+        net = NetworkScanner(args.ip)
+    else:
+        #TODO: descobrir ip
     w = Writer()
     while(True):
         clients = net.scan()
