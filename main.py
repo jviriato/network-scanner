@@ -58,12 +58,16 @@ def printDevices(devices):
     for device in devices:
         print(device)
 
+def checkArgs(args):
+    if not args.ip:
+        # descobrir ip
+        pass
+    return args.ip
+
 def main():
     args = parseArguments()
-    if args.ip:
-        net = NetworkScanner(args.ip)
-    else:
-        #TODO: descobrir ip
+    ip = checkArgs(args)
+    net = NetworkScanner(ip)
     w = Writer()
     while(True):
         clients = net.scan()
