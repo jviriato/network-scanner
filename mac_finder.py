@@ -33,5 +33,5 @@ class MacFinder:
         """Retorna o Fabricante à partir de um endereço MAC.
         """
         initMac = self._parseMACManufacturer(mac)
-        return self.manuf.get(initMac, 'Este MAC não existe!')
+        return self.manuf.get(initMac, 'Não consegui identificar o criador')
     
